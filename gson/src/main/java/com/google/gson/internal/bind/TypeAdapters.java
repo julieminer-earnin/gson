@@ -781,7 +781,7 @@ public final class TypeAdapters {
           SerializedName annotation = classOfT.getField(name).getAnnotation(SerializedName.class);
           if (annotation != null) {
             name = annotation.value();
-            ArrayList<String> alternateNames = new ArrayList<>();
+            ArrayList<String> alternateNames = new ArrayList<String>();
             String camelCaseName = name.replaceFirst(name.substring(0), name.substring(0).toLowerCase());
             String pascalCaseName = name.replaceFirst(name.substring(0), name.substring(0).toUpperCase());
             if (!name.equals(camelCaseName)) {
