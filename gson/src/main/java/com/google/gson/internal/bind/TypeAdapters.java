@@ -781,7 +781,17 @@ public final class TypeAdapters {
           SerializedName annotation = classOfT.getField(name).getAnnotation(SerializedName.class);
           if (annotation != null) {
             name = annotation.value();
-            for (String alternate : annotation.alternate()) {
+            ArrayList<String> alternateNames = new ArrayList<>();
+            String camelCaseName = name.replaceFirst(name.substring(0), name.substring(0).toLowerCase());
+            String pascalCaseName = name.replaceFirst(name.substring(0), name.substring(0).toUpperCase());
+            if (!name.equals(camelCaseName)) {
+              alternateNames.add(camelCaseName);
+            }
+            if (!name.equals(pascalCaseName)) {
+                alternateNames.add(pascalCaseName);
+            }
+            alternateNames.addAll(annotation.alternate());
+            for (String alternate : alternateNames) {
               nameToConstant.put(alternate, constant);
             }
           }
